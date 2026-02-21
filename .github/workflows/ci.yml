@@ -20,7 +20,6 @@ on:
   release:
     types:
       - published
-  workflow_dispatch:
 
 env:
   DEBIAN_FRONTEND: noninteractive
@@ -121,7 +120,7 @@ jobs:
 
           - target: x86_64-pc-windows-gnu
             host-target: x86_64-pc-windows-gnu
-            runner: blacksmith-4vcpu-windows-2025
+            runner: windows-latest
 
           - target: universal2-apple-darwin
             host-target: aarch64-apple-darwin
