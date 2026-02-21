@@ -155,6 +155,10 @@ jobs:
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork
 
     steps:
+      - name: 🩹 Work around https://github.com/actions/runner/issues/801
+        if: endsWith(matrix.target, '-linux-musl')
+        uses: laverdet/alpine-arm64@v1
+
       - name: 🧰 Install glibc Linux toolchain packages
         if: endsWith(matrix.target, '-linux-gnu')
         run: |
