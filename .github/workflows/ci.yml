@@ -101,26 +101,18 @@ jobs:
           - target: x86_64-unknown-linux-gnu
             host-target: x86_64-unknown-linux-gnu
             runner: blacksmith-4vcpu-ubuntu-2404
-            # renovate: datasource=docker
-            container: debian:bookworm-slim@sha256:e899040a73d36e2b36fa33216943539d9957cba8172b858097c2cabcdb20a3e2
 
           - target: x86_64-unknown-linux-musl
             host-target: x86_64-unknown-linux-gnu
             runner: blacksmith-4vcpu-ubuntu-2404
-            # renovate: datasource=docker
-            container: alpine:3.23@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659
 
           - target: aarch64-unknown-linux-gnu
             host-target: aarch64-unknown-linux-gnu
             runner: blacksmith-4vcpu-ubuntu-2404-arm
-            # renovate: datasource=docker
-            container: debian:bookworm-slim@sha256:e899040a73d36e2b36fa33216943539d9957cba8172b858097c2cabcdb20a3e2
 
           - target: aarch64-unknown-linux-musl
             host-target: aarch64-unknown-linux-gnu
             runner: blacksmith-4vcpu-ubuntu-2404-arm
-            # renovate: datasource=docker
-            container: alpine:3.23@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659
 
           - target: x86_64-pc-windows-gnu
             host-target: x86_64-pc-windows-gnu
@@ -132,8 +124,6 @@ jobs:
 
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 60
-
-    container: ${{ matrix.container }}
 
     permissions:
       id-token: write
@@ -155,23 +145,12 @@ jobs:
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork
 
     steps:
-      - name: 🧰 Install glibc Linux toolchain packages
-        if: endsWith(matrix.target, '-linux-gnu')
+      - name: 🧰 Install Linux toolchain packages
         run: |
-          apt-get update
-          # curl is required by rustup.
-          # musl-tools is required to build musl binaries for the native architecture
+          sudo apt-get update
+          # musl-dev is required to build musl binaries for the native architecture.
           # python3-markdown-it is required to generate the Debian package only
-          apt-get install -yq build-essential cmake git curl \
-                              musl-tools \
-                              python3-markdown-it
-
-      - name: 🧰 Install musl Linux toolchain packages
-        if: endsWith(matrix.target, '-linux-musl')
-        run: |
-          apk update
-          # curl is required by rustup
-          apk add --no-cache build-base cmake git curl
+          sudo apt-get install -yq build-essential cmake musl-dev python3-markdown-it
 
       # This must go after the previous step so that a Git repository is checked out
       - name: 📥 Checkout source
@@ -197,18 +176,6 @@ jobs:
         uses: taiki-e/install-action@45a93d9c71692daf99a53feb97366fb6f4c3757f # v2
         with:
           tool: cargo-deb
-
-      # Our build container is minimal, and it doesn't contain any systemd package.
-      # systemd is responsible for setting up the machine ID files we use for
-      # testing the system ID retrieval code, so copy a dummy one
-      - name: 📏 Set up a dummy D-Bus machine ID for tests
-        if: contains(matrix.runner, 'ubuntu')
-        run: cat /proc/sys/kernel/random/uuid | tr -d '-' > /run/machine-id
-
-      # Required for the build script to be able to gather version information from Git
-      - name: 📏 Allow Git commands to run in the container directory
-        shell: bash
-        run: git config --global --add safe.directory "$PWD"
 
       - name: ✔️ Run tests
         env:
@@ -493,9 +460,7 @@ jobs:
   benchmark:
     name: Run and upload benchmarks
 
-    runs-on: ubuntu-latest
-
-    container: debian:bookworm-slim@sha256:e899040a73d36e2b36fa33216943539d9957cba8172b858097c2cabcdb20a3e2
+    runs-on: ubuntu-24.04
 
     # Benchmark failure is not critical enough to fail the whole workflow.
     # We will keep an eye on them anyway, though
