@@ -174,8 +174,9 @@ jobs:
         if: endsWith(matrix.target, '-linux-musl')
         run: |
           apk update
-          # curl is required by rustup
-          apk add --no-cache build-base bash cmake git curl
+          # curl is required by rustup.
+          # jq is required by taiki-e/install-action for ARM64 runners
+          apk add --no-cache build-base bash cmake git curl jq
 
       # This must go after the previous step so that a Git repository is checked out
       - name: 📥 Checkout source
