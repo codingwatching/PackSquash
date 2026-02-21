@@ -11,7 +11,7 @@
 use obfstr::random;
 use rand_xoshiro::{
 	Xoshiro128Plus,
-	rand_core::{RngCore, SeedableRng}
+	rand_core::{Rng, SeedableRng}
 };
 use std::{
 	borrow::Cow,

@@ -20,7 +20,7 @@ name = "benches"
 aes = "0.8.4"
 ahash = "0.8.12"
 aho-corasick = "1.1.4"
-bytes = "1.11.0"
+bytes = "1.11.1"
 crc32fast = "1.5.0"
 dasp_frame = "0.11.0"
 dasp_interpolate = { version = "0.11.0", features = ["sinc"] }
@@ -29,31 +29,31 @@ dasp_sample = "0.11.0"
 dasp_signal = { version = "0.11.0", default-features = false }
 enumset = { version = "1.1.10", features = ["serde"] }
 fastnbt = "2.6.0"
-flate2 = { version = "1.1.5", features = ["zlib-ng-compat"] }
+flate2 = { version = "1.1.9", features = ["zlib-ng-compat"] }
 fpe = "0.6.1"
-futures = { version = "0.3.31", default-features = false }
+futures = { version = "0.3.32", default-features = false }
 globset = { version = "0.4.18", default-features = false }
 glsl-lang = { version = "0.8.1", features = ["lexer-full"] }
 glsl-lang-lexer = "0.8.1"
 glsl-lang-pp = "0.8.1"
 hkdf = "0.12.4"
 imagequant = { version = "4.4.1", default-features = false }
-indexmap = { version = "2.12.1", features = ["serde"] }
+indexmap = { version = "2.13.0", features = ["serde"] }
 itertools = "0.14.0"
 java-properties = { version = "2.0.0", optional = true }
 json_comments = "0.2.2"
 jsonpath_lib = "0.3.0"
-memchr = "2.7.6"
+memchr = "2.8.0"
 obfstr = "0.4.4"
 optivorbis = "0.3.0"
-oxipng = { version = "10.0.0", default-features = false, features = ["zopfli"] }
+oxipng = { version = "10.1.0", default-features = false, features = ["zopfli"] }
 patricia_tree = "0.10.1"
-rand_xoshiro = "0.7.0"
-regex = "1.12.2"
+rand_xoshiro = "0.8.0"
+regex = "1.12.3"
 rgb = "0.8.52"
 rubato = "0.16.2"
 serde = { version = "1.0.228", features = ["derive"] }
-serde_json = { version = "1.0.148", features = [
+serde_json = { version = "1.0.149", features = [
   "preserve_order",
   "unbounded_depth",
 ] }
@@ -62,7 +62,7 @@ sha2 = "0.10.9"
 spng = { version = "0.2.0-alpha.3", default-features = false, features = [
   "zlib-ng",
 ] }
-stacker = "0.1.22"
+stacker = "0.1.23"
 symphonia = { version = "0.5.5", default-features = false, features = [
   "aac",
   "flac",
@@ -71,13 +71,13 @@ symphonia = { version = "0.5.5", default-features = false, features = [
   "pcm",
   "wav",
 ] }
-sysinfo = { version = "0.38.0", default-features = false, features = [
+sysinfo = { version = "0.38.2", default-features = false, features = [
   "system",
 ] }
-tempfile = "3.24.0"
-thiserror = "2.0.17"
+tempfile = "3.25.0"
+thiserror = "2.0.18"
 tinyvec = "1.10.0"
-tokio = { version = "1.48.0", default-features = false, features = [
+tokio = { version = "1.49.0", default-features = false, features = [
   "fs",
   "io-util",
   "macros",
@@ -85,13 +85,13 @@ tokio = { version = "1.48.0", default-features = false, features = [
   "rt-multi-thread",
   "sync",
 ] }
-tokio-stream = { version = "0.1.17", default-features = false }
-tokio-util = { version = "0.7.17", default-features = false, features = [
+tokio-stream = { version = "0.1.18", default-features = false }
+tokio-util = { version = "0.7.18", default-features = false, features = [
   "codec",
   "io",
   "io-util",
 ] }
-uuid = "1.19.0"
+uuid = "1.21.0"
 vorbis_rs = { version = "0.5.5", default-features = false }
 walkdir = "2.5.0"
 zopfli = { version = "0.8.3", default-features = false, features = [
@@ -101,10 +101,10 @@ zopfli = { version = "0.8.3", default-features = false, features = [
 
 [dev-dependencies]
 criterion = { version = "=0.5.1", features = ["html_reports"] }
-futures = { version = "0.3.31", default-features = false, features = ["std"] }
+futures = { version = "0.3.32", default-features = false, features = ["std"] }
 pretty_assertions = "1.4.1"
 tar = { version = "0.4.44", default-features = false }
-tokio-test = "0.4.4"
+tokio-test = "0.4.5"
 xz2 = "0.1.7"
 
 # criterion-perf-events depends on perfcnt, and perfcnt is so tightly coupled with
@@ -120,11 +120,11 @@ core-foundation = "0.10.1"
 mach2 = "0.6.0"
 
 [target.'cfg(unix)'.dependencies]
-rlimit = "0.10.2"
+rlimit = "0.11.0"
 
 [target.'cfg(windows)'.dependencies]
 winreg = "0.55.0"
-wmi = { version = "0.18.0", default-features = false }
+wmi = { version = "0.18.2", default-features = false }
 
 [features]
 # Support all kinds of files added by modifications by default
