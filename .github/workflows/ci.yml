@@ -101,7 +101,7 @@ jobs:
           - target: x86_64-unknown-linux-gnu
             host-target: x86_64-unknown-linux-gnu
             runner: blacksmith-4vcpu-ubuntu-2404
-            container: debian:trixie-slim@sha256:f6e2cfac5cf956ea044b4bd75e6397b4372ad88fe00908045e9a0d21712ae3ba
+            container: debian:bookworm-slim@sha256:e899040a73d36e2b36fa33216943539d9957cba8172b858097c2cabcdb20a3e2
 
           - target: x86_64-unknown-linux-musl
             host-target: x86_64-unknown-linux-gnu
@@ -111,7 +111,7 @@ jobs:
           - target: aarch64-unknown-linux-gnu
             host-target: aarch64-unknown-linux-gnu
             runner: blacksmith-4vcpu-ubuntu-2404-arm
-            container: debian:trixie-slim@sha256:f6e2cfac5cf956ea044b4bd75e6397b4372ad88fe00908045e9a0d21712ae3ba
+            container: debian:bookworm-slim@sha256:e899040a73d36e2b36fa33216943539d9957cba8172b858097c2cabcdb20a3e2
 
           - target: aarch64-unknown-linux-musl
             host-target: aarch64-unknown-linux-gnu
@@ -491,7 +491,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    container: debian:trixie-slim@sha256:f6e2cfac5cf956ea044b4bd75e6397b4372ad88fe00908045e9a0d21712ae3ba
+    container: debian:bookworm-slim@sha256:e899040a73d36e2b36fa33216943539d9957cba8172b858097c2cabcdb20a3e2
 
     # Benchmark failure is not critical enough to fail the whole workflow.
     # We will keep an eye on them anyway, though
