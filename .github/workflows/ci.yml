@@ -18,6 +18,7 @@ on:
   release:
     types:
       - published
+  workflow_dispatch:
 
 env:
   DEBIAN_FRONTEND: noninteractive
@@ -98,27 +99,27 @@ jobs:
         include:
           - target: x86_64-unknown-linux-gnu
             host-target: x86_64-unknown-linux-gnu
-            runner: ubuntu-latest
+            runner: blacksmith-4vcpu-ubuntu-2404
             container: debian:bookworm-slim
 
           - target: x86_64-unknown-linux-musl
             host-target: x86_64-unknown-linux-gnu
-            runner: ubuntu-latest
+            runner: blacksmith-4vcpu-ubuntu-2404
             container: debian:bookworm-slim
 
           - target: aarch64-unknown-linux-gnu
             host-target: aarch64-unknown-linux-gnu
-            runner: ubuntu-24.04-arm
+            runner: blacksmith-4vcpu-ubuntu-2404-arm
             container: debian:bookworm-slim
 
           - target: aarch64-unknown-linux-musl
             host-target: aarch64-unknown-linux-gnu
-            runner: ubuntu-24.04-arm
+            runner: blacksmith-4vcpu-ubuntu-2404-arm
             container: debian:bookworm-slim
 
           - target: x86_64-pc-windows-gnu
             host-target: x86_64-pc-windows-gnu
-            runner: windows-latest
+            runner: blacksmith-4vcpu-windows-2025
 
           - target: universal2-apple-darwin
             host-target: aarch64-apple-darwin
@@ -200,8 +201,9 @@ jobs:
       - name: ✔️ Run tests
         env:
           CARGO_BUILD_TARGET: ${{ matrix.target == 'universal2-apple-darwin' && 'aarch64-apple-darwin' || matrix.target }}
+          NEXTEST_PROFILE: ci
         run: |
-          cargo nextest run --workspace --status-level all --release
+          cargo nextest run --workspace --status-level all --release --lib --bins --tests --examples
           cargo test --doc --workspace --release
 
       - name: 🔨 Build with optimized standard library
@@ -389,7 +391,7 @@ jobs:
   build-docker-images:
     name: Build Docker images
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
 
     env:
       # Defaults to docker.io (Docker Hub)
