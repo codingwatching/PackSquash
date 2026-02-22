@@ -112,13 +112,13 @@ jobs:
 
           - target: aarch64-unknown-linux-gnu
             host-target: aarch64-unknown-linux-gnu
-            runner: blacksmith-4vcpu-ubuntu-2404-arm
+            runner: ubuntu-24.04-arm
             # renovate: datasource=docker
             container: debian:bookworm-slim@sha256:e899040a73d36e2b36fa33216943539d9957cba8172b858097c2cabcdb20a3e2
 
           - target: aarch64-unknown-linux-musl
             host-target: aarch64-unknown-linux-musl
-            runner: blacksmith-4vcpu-ubuntu-2404-arm
+            runner: ubuntu-24.04-arm
             # renovate: datasource=docker
             container: alpine:3.23@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659
 
