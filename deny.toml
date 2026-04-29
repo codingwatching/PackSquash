@@ -105,7 +105,10 @@ skip-tree = [
 [sources]
 unknown-registry = "deny"
 unknown-git = "deny"
-allow-git = ["https://github.com/aloucks/spng-rs"]
+allow-git = [
+  "https://github.com/aloucks/spng-rs",
+  "https://github.com/str4d/fpe"
+]
 
 [sources.allow-org]
 github = ["ComunidadAylas"]

@@ -8,7 +8,12 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-No changes yet.
+### Changed
+
+#### Internal
+
+- Third-party dependency updates.
+  - Some dependency changes addressed minor public security advisories.
 
 ## [0.4.1] - 2026-01-01
 
